@@ -255,17 +255,19 @@ def answer_query(query: str) -> tuple[str, str]:
     query = (query or "").strip()
 
     if not query:
-
         return (
             "Please enter a question about chronic kidney disease.",
             "No question entered.",
         )
 
     try:
-
         orchestrator = get_app_orchestrator()
 
+        logger.info("Starting orchestrator for query: %s", query)
+
         response = orchestrator.run(query)
+
+        logger.info("Orchestrator completed successfully.")
 
         return (
             response.answer,
@@ -273,17 +275,13 @@ def answer_query(query: str) -> tuple[str, str]:
         )
 
     except Exception as exc:
-
-        logger.exception(
-            "Orchestrator failed."
-        )
+        logger.exception("Orchestrator failed.")
 
         return (
-            FRIENDLY_ERROR,
-            f"Error: `{type(exc).__name__}`",
+            f"⚠️ The CKD pipeline could not complete the request.\n\n"
+            f"**Error:** `{type(exc).__name__}: {exc}`",
+            "The request failed before response metadata was generated.",
         )
-
-
 # ============================================================
 # HEADER
 # ============================================================
