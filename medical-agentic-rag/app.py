@@ -179,7 +179,7 @@ def build_interface() -> gr.Blocks:
                     label="Conversation",
                     height=430,
                     type="messages",
-                    show_copy_button=True,
+                    buttons=["copy"],
                 )
                 question = gr.Textbox(
                     label="Your question",
