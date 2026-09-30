@@ -4,4 +4,4 @@ pydantic
 pydantic-settings
 python-dotenv
 numpy
-gradio
+gradio==5.50.0
